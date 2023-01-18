@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Internet of Things Spa Monitor</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="generic.html">Ipsum veroeros</a></li>
+							<li><a href="generic.html">Tempus etiam</a></li>
+							<li><a href="generic.html">Consequat dolor</a></li>
+							<li><a href="elements.html">Elements</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Internet of Things: Spa Monitor</h1>
+
+							<!-- Text -->
+								<section>
+									<h2>(Web Hosted Temperature Control, PH, and Video Monitor of Outdoor Spa)</h2>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-12"><span class="image fit"><img src="Project 2.jpeg" alt="" /></span></div>
+										</div>
+									</div>
+									<hr />
+									<h2>Summary:</h2>
+									<p>This spa monitoring system is focused around a raspberry pi that is local to a hottub and has been an exercise in Interface and Network Technologies. The Raspberry Pi is able to measure temperature (USB), PH (I2C), and video (Pi Camera Ribbon) stored on an SQLite Database while controlling output status to an Actuator LED (GPIO) and LCD (SPI). The Raspberry Pi 2 uses a wifi dongle to connect to the local wifi network. I have implemented a web server through flask that allows a user on the network to see the measurement data from the Hot Tub and provide the ability for the user to change the status of the actuator LED.</p>
+									<hr />
+									<h2>Technical Skills Utilized:</h2>
+									<ul>
+												<li>Sensor Interface Technologies</li>
+												<li>Internet of Things Connectivity</li>
+											</ul>
+									
+									<hr />
+									<h2>Prototype:</h2>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-12"><span class="image fit"><img src="Project 1.jpeg" alt="" /></span></div>
+										</div>
+									</div>
+									<hr />
+									<h2>Environment Input:</h2>
+									<p>Temperature, PH, and Light will be detected by the Temperature Probe, PH Probe, and Camera (respectively). This data is appropriately formatted to be stored locally on a SQLite database on the Raspberry Pi. As the user refreshes and interacts with the web server hosted by Flask, the data is uploaded appropriately to the web application.</p>
+									<h2>User Input:</h2>
+									<p><span class="image right"><img src="Block Diagram 2.png" alt="" /></span>As the user faces the UI of the web application, they are able to toggle the status of the actuator. This is handled by flask and instructs the Raspberry Pi through the python language to change the status of the actuator via GPIO. The status of the actuator is updated on the web interface as well as on the local LCD.</p>
+									<h2>Describing Interface Technologies:</h2>
+									<ul>
+										<li><a href="https://github.com/AtlasScientific/Raspberry-Pi-sample-code">Atlas Scientific Temperature Probe through USB uses 12Mbit/s standard USB protocol.</a></li>
+										<li><a href="https://github.com/AtlasScientific/Raspberry-Pi-sample-code">Atlas Scientific PH Probe through I2C uses 3.3V Logic, 100kHz Clock, and a default slave address of 0x63. </a></li>
+										<li><a href="https://github.com/adafruit/Adafruit_Nokia_LCD">Nokia 5110 LCD through SPI uses 3.3V Logic, 7.8MHz Clock. </a></li>
+										<li>Off-Shelf LED through Raspberry Pi GPIO</li>
+										<li><a href="https://blog.miguelgrinberg.com/post/video-streaming-with-flask">Raspberry Pi V2 through standard Raspberry Pi Camera Interface. </a></li>
+									</ul>
+									<h2>Describing Network Technologies:</h2>
+									<p>Flask is used to host a web server and web page for User Interface. </p>
+									<h2>Understanding the Networking Layers:</h2>
+									<ul>
+										<span class="image right"><img src="Block Diagram 3.png" alt="" /></span>
+										<li>Application Layer: HTTP and Flask</li>
+										<li>Transport Layer: TCP Stack utilized by Flask</li>
+										<li>Network Layer: IPv4 Protocol</li>
+										<li>Local IP address: 192.168.0.32:5000</li>
+										<li>Using port 5000</li>
+									</ul>
+									<h2>Website Wire Framework:</h2>
+									<p>I have a very simple and straightforward web framework. When a person on the local network give the URL: 192.168.0.32:5000, the homepage comes up which allows the user to see a recent Temperature and PH reading. The home page will also give the status of the LED actuator by reading the GPIO state as an input. The home page offers a button which will toggle the state of the actuator. I have enabled this feature by linking to ‘/cakes’ on-click. This page has no template and essentially works behind the scenes. It detects the GPIO status and flips it. ‘/cakes’ immediately routes back to the home page where the LCD and the LED status is appropriatel§y changed and displayed. </p>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-8"><span class="image fit"><img src="Website Interface 1.png" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="Block Diagram 4.jpeg" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="Code 1.png" alt="" /></span></div>
+										</div>
+									</div>
+									<iframe width="420" height="315"
+src="https://www.youtube.com/embed/44iR86iwIEE">
+</iframe>
+									<h2>Atlas Scientific's ENIAC Hosts and Logs Data (Early Development):</h2>
+									<p>ENIAC is a program offered by Atlas Scientific that is installed on the Raspberry Pi to easily communicate with sensors to host and tabulate recorded data. The temperature and the PH probes must be connected to the Raspberry pi's USB interface through a EZO BNC to USB circuit. </p>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-6"><span class="image fit"><img src="PH 2.png" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="PH 1.png" alt="" /></span></div>
+										</div>
+									</div>
+									<h2>Discussion of waterproof housing:</h2>
+									<p>When all electrical components are working correctly, the system will be enclosed in a waterproof housing that can sustain humidity and splashing from the Spa as well as rain and heat from the elements.</p>
+
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

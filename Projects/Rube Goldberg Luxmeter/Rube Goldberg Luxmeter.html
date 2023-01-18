@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>A Rube Goldberg Luxmeter
+</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="generic.html">Ipsum veroeros</a></li>
+							<li><a href="generic.html">Tempus etiam</a></li>
+							<li><a href="generic.html">Consequat dolor</a></li>
+							<li><a href="elements.html">Elements</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>A Rube Goldberg Luxmeter</h1>
+
+							<!-- Text -->
+								<section>
+									<h2>Summary:</h2>
+									<p>This purposefully complicated circuit implementation explores a fun and challenging way to implement a Luxmeter that measures brightness in foot-candles. The working hardware chains over 10 circuit element blocks together to transmit data ultrasonically over 25ft of air and displays the amount of light to an LCD with an accuracy comparable to commercial Luxmeters. These devices are useful in many applications such as in photography to determine optimal exposure. This page will present the overall architecture of the system and also highlight some of the more eccentric and complicated blocks.</p>
+									<h2>Technical Skill Utilized:</h2>
+									<ul>
+										<li>Analog Circuit Design and Simulation</li>
+										<li>Breadboarding and Prototyping</li>
+										<li>Microcontroller embedded programming</li>
+									</ul>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-12"><span class="image fit"><img src="Block Diagram 2.png" alt="" /></span></div>
+										</div>
+									</div>
+									<h2>The Architecture of the System</h2>
+									<p>The system consists of two functional units - a measuring/transmitter unit and a receiver/display unit. The two units communicate using 40kHz-carrier ultrasonic link. Both units use 9V battery power.</p>
+									<h2>Our Fully Working Luxmeter</h2>
+									<p><span class="image left"><img src="Breadboard.png" alt="" /></span>The transmission side is on the left while the receiver side is on the right. The Tx and Rx transducers are pointed directely at eachother just to the right of the main breadboard.</p>
+									<p>.</p>
+									<p>.</p>
+									<p>.</p>
+									<p>.</p>
+									<p>.</p>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-6"><span class="image fit"><img src="Block Diagram 1.png" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="Block Diagram 3.png" alt="" /></span></div>
+										</div>
+									</div>
+									<h2>Functioning Blocks of the Transmitter Unit and Receiver/Display Unit</h2>
+									<p>The photo diode first converts light-intensity to current which is magnified by the current amplifier. The Current Controlled Oscillator (CCO) takes this current value and converts it into a unique frequency of oscillation. A modulator encodes the signal with a 40 kHz carrier wave. This carrier wave is vital to the ultrasonic communication through air as it is a very high density medium. The signal and its carrier are received by the Rx transducer and amplified such that its information can be extracted by a Phase Lock Loop (PLL) based Tone Detector. A decoder embedded into an Arduino Microprocessor receives square waves from the Tone Detector and displays an accurate amount of foot-candles based off of original light intensity to the LCD.</p>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-8"><span class="image fit"><img src="Schematic 1.png" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="Schematic 3.png" alt="" /></span></div>
+										</div>
+									</div>
+								</section>
+								<section>
+									<div class="row">
+										<div class="col-6 col-12-medium">
+											<h2>Current-Controlled Saw-Tooth Oscillator</h2>
+											<p>A 555-timer IC can be configured to operate as a current controlled oscillator. In this configuration, clamping the potential of the "voltage control" pin avoids sensitivity to changes in the supply voltage. The capacitance value C1 is directly related to the output frequency range. A value of 1uF was determined to produce the best spread of frequency.</p>
+										</div>
+										<div class="col-6 col-12-medium">
+											<h2>A 40kHz Pierce Oscillator</h2>
+											<p>Using a piezoelectric crystal, a 40kHz carrier wave signal could be generated using a Pierce Oscillator typology. This block enables this Luxmeter to transmit its data ultrasonically through air up to 25ft.</p>
+										</div>
+									</div>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-4"><span class="image fit"><img src="Graph 2.png" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="Graph 3.png" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="Graph 1.png" alt="" /></span></div>
+										</div>
+									</div>
+									<h2>Transmitter, Receiver, and Frequency Response Characteristics</h2>
+									<p>In order to ensure matching and correct functionality, the transmission characteristics and frequency response of the transducers were verified to information on their data sheets. Data observations show the center frequency to be 40kHz with 34dB of makeup gain required.</p>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-6"><span class="image fit"><img src="Schematic 2.png" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="Graph 4.png" alt="" /></span></div>
+										</div>
+									</div>
+									<h2>Band-Pass Amplifier</h2>
+									<p>This circuit block makes up for signal energy that is lost during ultrasonic transmission. Based on the transmission characteristics of the transducers, this Band-Pass Amplifier was designed and simulated to ensure a gain of 50 in the 40kHz frequency range. </p>
+									<h2>PLL based Tone Decoder</h2>
+									<p><span class="image left"><img src="Schematic 4.png" alt="" /></span>Running on a 5V power supply, this Tone Decoder IC is tuned to react to and lock on to the 40kHz carrier wave. Capacitor C2 acts as a low pass filter while C3 is an output filter. This block will output 0V when a tone is detected and 5V otherwise. </p>
+									<p>.</p>
+									<p>.</p>
+									<p>.</p>
+									<p>.</p>
+									<h2>Microprocessor Decoder</h2>
+									<p><span class="image left"><img src="image-asset.png" alt="" /></span>An Arduino reads a voltage-based frequency from the tone decoder to calculate and display the amount of foot-candles that the photo-diode reads. The input voltage is sampled at 2.4 kSamples/second which is well above the Nyquist sampling requirement for the input frequency range. </p>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

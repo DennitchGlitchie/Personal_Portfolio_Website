@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Autonomous Small-Scale Race Car Competition</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="generic.html">Ipsum veroeros</a></li>
+							<li><a href="generic.html">Tempus etiam</a></li>
+							<li><a href="generic.html">Consequat dolor</a></li>
+							<li><a href="elements.html">Elements</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Autonomous Small-Scale Race Car Competition</h1>
+
+							<!-- Text -->
+								<section>
+									<h2>Summary:</h2>
+									<p>A electrical engineer partner and I were tasked with designing and building an autonomous "track following" race car that would compete against other teams in a state-wide competition. The track is constructed from a 75kHz current carrying wire held in place by white tape and the size of the track could extend to half the size of a standard auditorium. Utilizing an Mbed LPC1768 Micro-controller to run the autonomous routine, our design integrated two fundamentally different track detection methods. Starting with just the chassis of a remote controlled car, all elements of this project were designed from scratch including the PCB and the embedded PID controller. The name "Natcar" comes from National Instruments who originally hosted the competition. </p>
+									<hr />
+									<h2>Technical Skills Utilized: </h2>
+									<ul>
+										<li>Circuit design integrating AFE, Line-Array Camera, motor drivers to</li>
+										<li>Mbed Micro-controller</li>
+										<li>PCB layout and fabrication</li>
+										<li>CAD modeling for 3D printed parts</li>
+										<li>Programming and tuning an embedded PID controller for smooth handling of track obstacles</li>
+									</ul>
+									<h2>Detection and Staying on Track:</h2>	
+									<p>The Analog Front End (AFE) detection consisted of a series of LC tank circuits along the bottom of the car tuned to resonate at the frequency of 75kHZ track. These signals were filtered and conditioned to produce a steady voltage signals proportional to their respective distances to the track. In addition, a line-scan camera was mounted above the car so that it was able to detect the white tape a few feet in front of the car. The AFE offers information as to where the car is currently in relation to the track while the line-scan camera provided insight to where the car needed to go next. A PID controller was implemented through the Mbed's processor to produce nice and polished movement along the track. Our car, named "UpDog", placed 3rd in the statewide competition with by far the smoothest run.</p>
+									<iframe width="420" height="315"
+src="https://www.youtube.com/embed/OjMktd966_Y">
+</iframe>
+									<h2>Team UpDog at UC Davis Natcar Competition:</h2><p>Team UpDog at state-wide competition: 32.87 seconds at 9.13 ft/s
+
+									The exact specification of the track is kept a secret until the day of the competition. This competition track had a variety of obstacles including step discontinuities, a hair pin turn, and a pretzel loop.</p>
+									<hr />
+									<h3>Schematic:</h3>
+									<p><span class="image left"><img src="Schematic 1.png" alt="" /></span>From left to right. Un-used Op-Amps have a closed loop and are grounded so they do not pick up noise and latch back and forth between the rails. A few switches and potentiometers are included for testing and debugging. The output from the LC tank is amplified by a non-intverting Op-Amp configuration, the output of which goes into a peak detector that acts as an AC-DC converter. The output of this goes into the ADC of the mBed. The motor is anti-parallel with a flyback diode to take care of inductive spiking, and is switched using two MOSFETS that are controlled using a PWM signal from the mBed. The rest is pretty standard.</p>
+									<h3>Layout:</h3>
+									<p><span class="image left"><img src="Routing Screenshot 1.png" alt="" /></span>From left to right. Un-used Op-Amps have a closed loop and are grounded so they do not pick up noise and latch back and forth between the rails. A few switches and potentiometers are included for testing and debugging. The output from the LC tank is amplified by a non-intverting Op-Amp configuration, the output of which goes into a peak detector that acts as an AC-DC converter. The output of this goes into the ADC of the mBed. The motor is anti-parallel with a flyback diode to take care of inductive spiking, and is switched using two MOSFETS that are controlled using a PWM signal from the mBed. The rest is pretty standard.</p>
+									<p>.</p>
+									<hr />
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-6"><span class="image fit"><img src="PCBA 2.jpeg" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="PCBA 2.jpeg" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="PCBA 3.jpeg" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="BOM.png" alt="" /></span></div>
+										</div>
+									</div>
+									<hr />
+									<h2>Embedded Controller Demonstration Run:</h2>
+									<p>Setting up our own test track for extensive tuning of non-linear PID controller</p>
+									<iframe width="420" height="315"
+src="https://www.youtube.com/embed/W5b_nLeJ-Fc">
+</iframe>
+									<hr />
+									<h2>Senior Project Final Run (Half-way to competition)</h2>
+									<p>This run earned our team an A in our cumulative senior design class. Myself and another teammate continued this project to become competition ready over the next few months.</p>
+									<iframe width="420" height="315"
+src="https://www.youtube.com/embed/I8TJpTrTIXg">
+</iframe>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Embedded Systems Shape the World</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="generic.html">Ipsum veroeros</a></li>
+							<li><a href="generic.html">Tempus etiam</a></li>
+							<li><a href="generic.html">Consequat dolor</a></li>
+							<li><a href="elements.html">Elements</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Embedded Systems Shape the World</h1>
+							<h1>E.S.R.E.A.M. (Embedded Systems Rule Everything Around Me)</h1>
+							<h2>(Embedded Systems Rule Everything Around Me)</h2>
+
+							<!-- Text -->
+								<section>
+									<h2>Summary:</h2>
+									<p>University of Texas Austin offers a free self-paced online course Embedded Systems - Shape The World which utilizes a Texas Instruments TM4C123 development board which utilizes a high performance 32-bit ARM Cortex M4F based MCU. The course has three capstone projects:</p>
+									<div class="col-6 col-12-medium">
+											<ol>
+												<li>A traffic light controller</li>
+												<li>A smart object with in system as part of the Internet of Things</li>
+												<li>A personal fitness device with Bluetooth connectivity.</li>
+											</ol>
+									</div>
+									<hr />
+									<h2>The course covers the following topics:</h2>
+											<ul>
+												<li>Understanding of embedded systems using modular design and abstraction</li>
+												<li>C programming: considering both function and style</li>
+												<li>Build and test circuits with switches, LEDs, resistors, potentiometers, and liquid crystal displays</li>
+												<li>Synchronizing hardware and software input/output with switches, lights, sound, sensors. motors, and liquid crystal displays</li>
+												<li>Learn how to solve problems using a finite state machine</li>
+												<li>Debug using oscilloscopes, logic analyzers, and software instrumentation</li>
+												<li>Learn how to read a data sheet</li>
+												<li>Construct traffic light controller</li>
+												<li>Implement an I/O driver and multi-threaded programming using interrupts</li>
+												<li>Construct a smart object and create a system as part of the Internet of Things</li>
+												<li>Learn how to build your own real-time operating system</li>
+												<li>Learn about modular design while creating a personal fitness devic</li>
+												<li>Learn about Bluetooth communication</li>
+											</ul>			
+									<hr />
+									<div class="col-6 col-12-medium">
+											<ol>
+												<li><a href="https://www.edx.org/course/embedded-systems-shape-the-world-microcontroller-i">Embedded Systems - Shape The World: Microcontroller Input/Output</a></li>
+												<li><a href="https://www.google.com/url?q=https://www.edx.org/course/embedded-systems-shape-world-multi-utaustinx-ut-6-20x%23!&sa=D&source=editors&ust=1665995045180671&usg=AOvVaw0WUMfJ0mUEQC4-bkQWA4EJ">Embedded Systems - Shape The World: Multi-Threaded Interfacing</a></li>
+												<li><a href="https://www.google.com/url?q=https://www.edx.org/course/real-time-bluetooth-networks-shape-world-utaustinx-ut-rtbn-12-01x-0&sa=D&source=editors&ust=1665995045180988&usg=AOvVaw1eXtp63G9R9ihK_O0J5tbk">Real-Time Bluetooth Networks - Shape the World</a></li>
+											</ol>
+									</div>
+									<p>For updated code for labs, please see my <a href="file:///Users/garges/Documents/Personal%20Portfolio%20Website%20Development/Projects/Embedded%20Systems%20Shape%20the%20World/Embedded%20Systems%20Shape%20the%20World_old.html#:~:text=For%20updated%20code%20for%20labs%2C%20please%20see%20my%20Github%20project%3A">Github Project Repository</a>
+									<hr />
+									<h3>Personal Learning Notes with Lab 12 Hardware Interrupts:</h3>
+										<ul>
+											<li>On the ARM Cortex-M process, exceptions include resets, software interrupts and hardware interrupts.</li>
+											<li>Interrupts on the Cortex-M are controlled by the Nested Vectored INterrupt Controller (NVIC).</li>
+											<li>Each exception (interrupt) has an associated 32-bit vector that points to the memory location where the ISR that handles the exception is located.</li>
+											<li>Vectors are stored in ROM at the beginning of memory.</li>
+											<li>DCD command is an assembler pseudo-op that defines a 32-bit constant.</li>
+											<li>A Psuedo-operation is an instruction to the assembler that does not generate any machine code. The assembler resolves pseudo-ops during assembly, unlike machine instructions, which are resolved only at runtime.</li>
+											<li>Each type of interrupt has: Vector address (0x00000040); Number (16); IRQ (0); ISR name in Startup.s (GPIOPortA_Handler); NVIC (NVIC_PRI0_R); Priority bits (7-5)</li>
+											<li>Vector priority is 3 bits but priority is 1->8?
+											<li>Interrupt numbers before 16 contain the faults, software interrupt and SysTick; these interrupts will be handled differently from interrupts 16 and up.</li>
+											<li>Interrupts have both an enable register (NVIC_EN0_R 1 bit), a disable register (NVIC_DIS0_R 1 bit), a priority register (NVIC_PRI0_R 3 bits)</li>
+											<li>Find the priority register m where m = n/4 where n is the IRQ number, priority registers have 4 interrupt priorites within it 5-7, 13-15, 21-23, 29-31</li>
+											<li>Each vector address (vector table) is for bits long starting with IRQ 0 at 0x00000040</li>
+											<li>There exists a register called PRIMASK which shows whether interrupts are enabled ("the I bit") as a 0</li>
+											<li>There exists a IPSR register where 0 means Thread Mode vs a non-zero value which is Handler Mode</li>
+											<li>There exists a BASEPRI register: when BASEPRI register is zero, all interrupts are allowed and the BASEPRI register is not active.</li>
+											<li>SysTick counter goes from 1 to 0, the Count flag in NVIC_ST_CTRL_R register is set triggering an interrupt.</li>
+											<li>The current instruction is finished</li>
+											<li>Eight registers are pushed on the stack with R0 on top followed by R1, R2, R3, R12, LR (load register), PC (program counter), and PSR</li>
+											<li>The vector address is loaded in to the PC (this is the vector address 0x0000003C)</li>
+											<li>ISPR register is set to 15 (this is the interrupt "number")</li>
+											<li>The top 24 bits of LR are set to 0xFFFFFF, signifying the processor is executing an ISR.</li>
+											<li>The bottom 8 bits specify how to return from the interrupt: 0xF9 Return to Thread mode MSP (there are other ways, but this is this class)</li>
+											<li>To return from an interrupt, the ISR executes the typical function return BX LR</li>
+											<li>BX means branch and exchange the next instruction set</li>
+											<li>LR being 0xFFFFFFXX the ISR knows to pop eight registers off the stack.</li>
+											<li>LR being 0XFFFFFFF9 the ISR knows to return to thread mode using the MSP as its stack pointer.</li>
+											<li>When one ISR executes immediately after another (Tail chaining) the LR is set to 0xFFFFFFF1 which is a return to handler mode using the MSP as its stack pointer.</li>
+											<li>Optimization occurs because the registers don't need to be popped</li>
+											<li>Priority determines the order of service when two or more requests are made simultaneously. Two requests with the same priority will not interrupt each other</li>
+											<li>Any of the digital I/O pins on the TM4C family can be configured for edge triggering.</li>
+											<li>First enable its clock in the Run Mode Clock Gating Control Register 2 (RCGC2).</li>
+											<li>For each bit we wish to use we must set the DEN (Digital Enable) bit to be a regular digital input.</li>
+											<li>To use edge triggered interrupts we need to clear the corresponding bits in the PCTL register and AFSEL (Alternate Function Select) register.</li>
+											<li>We clear DIR (Direction) bits to make them input.</li>
+											<li>On this microcontroller only PD7 and PF0 need to be unlocked.</li>
+											<li>We clear bits in the AMSEL register to disable analog function</li>
+											<li>Can interrupt on levels and interrupt on edges. Most of the time we use edges.</li>
+											<li>Clearing the IS (Interrupt Sense) bit configures the bit for edge triggering.</li>
+											<li>Write to IBE (Interrupt Both Edges) and IEV (Interrupt Events) bits to define the active edge.</li>
+											<li>Clear the IME (Interrupt Mask Enable) bits if we are using a busy-wait synchronization; set the IME to use interrupt synchronization.</li>
+											<li>Remember there is a local enable in NVIC_EN0_R, and a global enable in PRIMASK (I bit)</li>
+											<li>GPIO_PORTF_IM_R (Arm bit), GPIO_PORTF_RIS_R (Trigger bit), GPIO_PORTF_ICR_R  (Clear Bit)</li>
+											<li>When an interrupt has occurred for a specific Digital I/O, the hardware sets the RIS (Raw Interrupt Status) bit and the software clears it.</li>
+											<li>Even if the IME bit is set to disable the interrupt, the hardware will still set the RIS bit when the interrupt would have occurred.</li>
+											<li>The RIS bits are read only</li>
+											<li>The software can acknowledge the event by writing ones to the corresponding IC (Interrupt Clear) bit in the GPIO_PORTA_IC_R register.</li>
+											<li>For on board switches, we need to enable the pull-up or pull-down resistors. Setting PUE or PDE will give a 13k -> 30k pull up/down resistor.</li>
+											<li>Five conditions must be simultaneously true for an edge-triggered interrupt to be requested:</li>
+												<ol>
+													<li>The trigger flag bit is set (RIS)</li>
+													<li>The arm bit is set (IME)</li>
+													<li>The level of the edge-triggered interrupt must be less than BASEPRI</li>
+													<li>The edge-triggered interrupt must be enabled in the NVIC_EN0_R</li>
+													<li>The I bit, bit 0 of the special register PRIMASK, is 0</li>
+												</ol>
+											<li>If two or more triggers share the same vector, these requests are called polled interrupts, and the ISR must determine which trigger generated the interrupt. If the requests have separate vectors, then these requests are called vectored interrupts and the ISR know which trigger caused the interrupt.
+											<p></p>
+
+											<iframe width="840" height="630"
+											src="https://www.youtube.com/embed/-mB_iAenOg8">
+											</iframe>
+
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

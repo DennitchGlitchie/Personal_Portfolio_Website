@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>High-End Studio Monitor</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="generic.html">Ipsum veroeros</a></li>
+							<li><a href="generic.html">Tempus etiam</a></li>
+							<li><a href="generic.html">Consequat dolor</a></li>
+							<li><a href="elements.html">Elements</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>High-End Studio Monitor</h1>
+
+							<!-- Text -->
+								<section>
+									<h2>Summary:</h2>
+									<p>Utilizing the schematic and block diagram of the Yamaha HS80 studio monitors, a partner and I hope to produce from scratch our own high-end studio monitors that mimic the quality of the HS80s but at a lower cost and with the enhanced ability for monitors to be auditorily tuned to their specific listening space. The scope of this project includes a full simulation and build of physical hardware (Speaker cabinets, woofer, tweeter) as well as electrical design and PCB layout of Pre-amp, Limiters, and Power Amp Circuits. The final product will include streamline and robust assembly of all hardware and electronics that will turn the heads of audio lovers and audiophiles alike.</p>
+									<hr />
+									<h2>Technical Skills Utilized:</h2>
+									<ul>
+										<li>Analog Circuit Design</li>
+										<li>Analog Filter Design</li>
+										<li>PCB Design and Layout</li>
+										<li>Power Analysis</li>
+										<li>Product Manufacturing Management</li>
+									</ul>
+									<hr />
+									<h2>Yamaha HS80 Specs:</h2>
+									<p><span class="image right"><img src="Studio Monitor Schematic 2.png" alt="" /></span>A service manual for Yamaha's high end HS80 studio monitors is publicly available <a href="http://bit.ly/2yig6Ou">online</a>. Many of our design considerations were compared to the block diagrams and circuit schematics of the HS80. This is a very valuable resource that gives us confidence in our design. </p>
+									<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
+									<hr />
+									<h2>Physical Build, Simulation, and Pre-Amp Filter Design:</h2>
+									<p><span class="image right"><img src="Monitor 1 2.jpeg" alt="" /></span>Through a subscription to the San Jose Makerspace in downtown, 12 x 12 x 18" cabinets were constructed to house the woofer and the tweeter units. These units can be found online <a href="http://bit.ly/2yhXZb6">here</a> and <a href="http://bit.ly/2kIbJqN">here</a>. <a href="http://www.hornresp.net/">Hornresp</a>, a Direct Radiator and Horn Loaded Loudspeaker Simulator allowed us to predict the reasonable power and speaker excursion low end resonance ability from the woofer and its physical enclosure. An impressive resonance of 42Hz from the 6-1/2" woofer is achieved by applying 10x the natural power to the low frequencies of the system so it is effectively resonant there. The speaker cone excursion becomes maximum at this point. The simulation also shows a minimum power natural resonance at 97Hz. Utilizing one of Cal Poly's larger lecture halls, we were able to iteratively test and design a digital flat-response pre-amp that was digitally implemented on a MiniDSP 2x4HD Digital Signal Processor. A 700W (per channel) rack amplifier was used in conjunction to allow auxiliary input to a pair of these speaker cabinets. Although music sounds great out of this setup, the system is not portable and the power amplifier's fans interfere with the listenability of the music out of the cabinets. We will have to design an analog solution that is of appropriate power and size to fit inside the cabinets.</p>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-6"><span class="image fit"><img src="images/pic13.jpg" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
+										</div>
+									</div>
+
+									<h2>Conversion of Digital Filters to Analog; Analog design of Pre-am and CAD:</h2>
+									<p>I am tasked with finding an analog pre-amp solution to the digital filters implemented on the MiniDSP 2x4HD. All of these filters were empirically determined based on near field measurements in Cal Poly's Phillips Hall. This is a starting point and measurements should be done in various rooms to better characterize the average response before settling on something as final. The cascade of filters are as follows:</p>
+									<h3>Woofer:</h3>
+									<ol>
+										<li>1650Hz 4th-order Butterworth lowpass. This keeps low frequencies to the woofer so that the tweeter receives the higher frequencies.</li>
+										<li>42Hz peaking filter (band-pass with gain) gain=9dB, Q=1.1. This filter applies almost 10x the natural power to the low frequencies of the system such that it is effectively resonant there. The speaker cone excursion becomes maximal at this point.</li>
+										<li>97Hz notch filter (same as a peaking filter but with negative gain) gain=-2dB Q=0.7. 97Hz appears to be the natural speaker resonance. At this real resonance, the power is actually at a minimum.</li>
+										<li>300Hz low shelf gain=-5dB Q=0.5 AND 450Hz low shelf gain=5dB Q=1. These filters can probably be reduced to a single low-Q bandpass with acceptable performance since they cancel out around 100Hz and below. The 450Hz filter was determined after elevating the speaker off the ground with a chair, so it may be that we use that filter for boundary gain correction (like the variable LF control on the Yamaha monitors). A speaker up against a wall needs less gain compared to an open room. Further experimentation will be useful here.</li>
+										</ol>
+									<h3>Tweeter:</h3>
+									<ol>
+										<li>2000Hz 3rd-order Butterworth low-pass</li>
+										<li>5500Hz high shelf gain=5dB Q=0.5</li>
+										<li>There's a natural peak in the response centered at 2.8kHz due to the gain provided by diffraction off the baffle. This can be geometrically confirmed by computing the wavelength of the resonance: ((1125ft/s)/2800Hz)*12inches/ft = 4.82in, which corresponds to the average distance of the tweeter from the baffle edge on the upper half of the speaker cabinet. Theoretically we could just EQ that peak out, but the high shelf seems to do the trick and can probably be made variable to act as our HF trim/boost control. Further measurements in different rooms should be made to confirm whether this is a good idea or not.</li>
+									</ol>
+									<h2>Circuit design of Power Amplifier and CAD:</h2>
+									<p>The TDA7498TR 100W Class-D Power Amplifier by STMicroelectronics was chosen for its audio application as well as its appropriate power level. An appropriate application circuit including setting of the CLK and output filters (LC lowpass, Snubber Filter, Dumping Network) was designed in Altium for testing purposes. The Input Network was also designed in Altium which will allow for XLR and RTS audio inputs. Screenshots can be seen below.</p>
+									<p>http://www.st.com/content/ccc/resource/technical/document/application_note/a4/35/61/a9/47/e2/4b/b0/DM00042610.pdf/files/DM00042610.pdf/jcr:content/translations/en.DM00042610.pdf</p>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-12"><span class="image fit"><img src="Schematic Screenshot 1.png" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="Routing Screenshot 1.png" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="Routing Schematic 2.png" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="PCBA 1.jpeg" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="Purchased Board 1.jpeg" alt="" /></span></div>
+										</div>
+									</div>
+									<p>Above is a comparison between my own fabricated design and an application board from China. The audio quality and signal integrity will be quantitatively compared between these two units to help improve custom solution.</p>
+									<iframe width="420" height="315"
+									src="https://www.youtube.com/embed/hJh6TbohXU8">
+									</iframe>
+									<h2>Some Measured Data Testing Class D Application Board:</h2>
+									<ul>
+										<li>Input Power: 25V ~.5A, </li>
+										<li>Input Signal: 70mVrms </li>
+										<li>Output Signal: 5.75Vrms </li>
+									</ul>
+									<h2>Using freeDSP as an Avenue for the Pre-Amplifier:</h2>
+									<p>The freeDSP is an open-source digital signal processor family for the do-it-yourself community. The applications range from active loudspeaker concepts (digital crossovers, bass enhancement, ...) and room equalization over advanced musical effect processors to car audio signal processing. The DSP we will bring up is the ADAU1701 which utilizes Sigma Studio which is a free tuning software for the development of ADI and DSP audio processors. The freeDSP application boards are not off the shelf and will likely need to be fabricated along with their programming boards.</p>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-6"><span class="image fit"><img src="DSP 2.png" alt="" /></span></div>
+										</div>
+									</div>
+									<p></p>
+									<h2>Discussion of Limiters:</h2>
+									<p>Our system might require audio limiters for robustness and protection from high-level inputs. Limiters would be placed before the Pre-Amp and/or the power amplifier.</p>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Interactive Neon: I Broke Dani B's Heart</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="generic.html">Ipsum veroeros</a></li>
+							<li><a href="generic.html">Tempus etiam</a></li>
+							<li><a href="generic.html">Consequat dolor</a></li>
+							<li><a href="elements.html">Elements</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Interactive Neon: I Broke Dani B's Heart</h1>
+
+							<!-- Text -->
+								<section>
+									<h2>Summary:</h2>
+									<p>The functionality of this sign involves a modified toy laser gun that emits a laser beam when the trigger is pulled. A receiver on the sign detects the emitted laser beam and changes which tubes are illuminated. Both the gun and the receiver are controlled by Arduino. This page will walk through some of the design challenges of this piece. This Neon Sign titled “I Broke Dani B’s Heart” has been on display in a Gallery in LA (12/7/19) and is currently on display in the She Bends touring exhibit in Loveland Colorado from January to May of 2020. </p>
+									<p>Below, see a video of the operation: </p>
+									<iframe width="840" height="630"
+											src="https://www.youtube.com/embed/07qdgKDiYiI">
+											</iframe>
+									<hr />
+									<h2>(1) Building the Sign and Receiver:</h2>
+									<p><a href="http://www.t2-neonpower.com/">Tech22</a> offers Neon Transformers that convert 120Vac to 8kV to illuminate the Neon Tubes - this is pretty standard as far as Neon Signs go. Conveniently, these transformers also offer 5V logic on/off control inputs. I utilized Arduino digital output pins to control 3 different transformers by creating a state-machine in software. A large enough differential signal between two LDR Resistor-Divider networks changes the state of the sign and illuminates the appropriate Neon tubes. This receiver topology was specifically designed to be able to operate in different lighting setting and to be resistant to self-trigger by nearby illuminating tubes. Testing was done at a variety of different light levels to determine threshold for the advancement of the state machine.</p>
+									<div class="row gtr-uniform">
+											<div class="col-12"><span class="image fit"><img src="images/Transformer Manual 1.png" alt="" /></span></div>
+									</div>
+									<h3>I have included the Arduino code for the sign below:</h3>
+									<pre><code>
+#define TUBE_0 2
+#define TUBE_1 3
+#define TUBE_2 4
+#define THRESHOLD 50
+#define NUM_STATES 4
+
+const int sensorPin1 = A1;  
+const int sensorPin2 = A3;
+
+int sensorValue1 = 0; 
+int sensorValue2 = 0;
+int state = 0;
+
+void activateState(){
+  switch(state){
+    case 0:
+      digitalWrite(TUBE_0, LOW);
+      digitalWrite(TUBE_1, HIGH);
+      digitalWrite(TUBE_2, HIGH);
+    break;
+    case 1:
+      digitalWrite(TUBE_0, HIGH);
+      digitalWrite(TUBE_1, LOW);
+      digitalWrite(TUBE_2, HIGH);
+    break;
+    case 2:
+      digitalWrite(TUBE_0, HIGH);
+      digitalWrite(TUBE_1, HIGH);
+      digitalWrite(TUBE_2, LOW);
+    break;
+    case 3:
+      digitalWrite(TUBE_0, HIGH);
+      digitalWrite(TUBE_1, HIGH);
+      digitalWrite(TUBE_2, HIGH);
+    break;
+  }
+}
+
+void advanceState(){
+  state++;
+  state %= NUM_STATES; 
+  
+}
+
+void setup() {
+  //Serial.begin(9600);
+  pinMode(TUBE_0, OUTPUT);
+  pinMode(TUBE_1, OUTPUT);
+  pinMode(TUBE_2, OUTPUT);
+
+  activateState(); 
+}
+
+void loop() {  
+  sensorValue1 = analogRead(sensorPin1);
+  sensorValue2 = analogRead(sensorPin2);
+  if(abs(sensorValue1 - sensorValue2) > THRESHOLD){
+    advanceState();
+    activateState();
+    delay(500); 
+  }
+}
+									</code></pre>
+									<h3>Below are Images of the Sign Assembly:</h3>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-4"><span class="image fit"><img src="images/Neon 4.jpeg" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="images/Neon 3.jpeg" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="images/Neon 2.jpeg" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="images/Build+4.jpeg" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="images/Targets 1.jpeg" alt="" />
+										</div>
+									</div>
+									<hr />
+									<h2>(2) Building the Laser Gun:</h2>
+									<p>I searched online for a toy gun that seemed easy to modify for the purpose of adding a laser output. I found the LilPals Super Space Blaster Gun that made laser noises, lit up, and even had a spinning motor inside. The motor was removed to make room for the Arduino and part of the plastic in the barrel was hollowed out to place in a Quarton Laser Module. I added a FET as a trans-impedance amplifier for the Laser Module. Luckily, the toy gun was already set up with a pull-up trigger that required a wire and a pull-down resistor to interface with. </p>
+									<p>Since this is a battery powered system, I decided to use a sleep/interrupt routine in software. I have included the Arduino code for the sign below:</p>
+									<pre><code>
+#include <avr/sleep.h>
+#define INTERRUPT_PIN 2
+#define LASER_OUTPUT_PIN 3
+#define LED_BUILTIN_PIN LED_BUILTIN
+volatile bool flag = false;
+
+
+void setup() {
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+  //Serial.begin(9600);
+  
+  pinMode(LASER_OUTPUT_PIN, OUTPUT);
+  //pinMode(LED_BUILTIN_PIN, OUTPUT);
+  pinMode(INTERRUPT_PIN, INPUT);
+  
+  //digitalWrite(LED_BUILTIN_PIN, HIGH);
+
+  attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), wakeUp, RISING); //COULD BE FALLING DEPENDING ON WIRING 
+}
+
+void loop() {
+  
+  if (!flag){
+    return;
+  }
+
+  //Serial.println("Interrupt Fired");
+
+  if (digitalRead(INTERRUPT_PIN) == HIGH){
+    //Serial.println("Interrupt Fired");
+    digitalWrite(LASER_OUTPUT_PIN,HIGH);
+    delay(400);
+    digitalWrite(LASER_OUTPUT_PIN,LOW);  
+    delay(100);      //this might be too long
+  }
+  flag = false;
+
+  //Serial.println("Going to Sleep");
+  //delay(1000);
+  sleep_enable();
+  sleep_cpu();
+  //processor shuts off for indeterminant amount of time until interrupt 
+  sleep_disable();
+  
+}
+
+void wakeUp(){
+   flag = true;
+}
+									</code></pre>
+									<div class="row gtr-uniform">
+											<div class="col-12"><span class="image fit"><img src="images/Laser Gun 1.jpeg" alt="" /></span></div>
+										</div>
+								</section>
+									
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
